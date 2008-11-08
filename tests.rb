@@ -1,4 +1,6 @@
-#!/usr/bin/env ruby1.9
+# Copyright (c) 2008 Olov Lassus <olov.lassus@gmail.com>
+# See LICENSE file for license details.
+
 require 'test/unit'
 require 'vec'
 
@@ -131,7 +133,7 @@ class TestVec < Test::Unit::TestCase
     v1 = Vec[3, 0, 0]
     v2 = Vec[1, 1, 0]
     angle = Math.acos((v1 ** v2) / (v1.length * v2.length))
-    assert_equal((Math::PI/4).round(4), angle.round(4))
+    assert_in_delta((Math::PI/4), angle, 0.01)
     assert_equal(v1 ** v2, v1.dot(v2))
   end
   def test_cross_is_perpendicular

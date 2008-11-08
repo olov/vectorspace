@@ -1,3 +1,11 @@
 Vector Space
 ============
 Vectors are fun.
+Written for no particular reason other than trying out Ruby.
+Is likely pretty redundant, overall.
+Written on Ruby 1.9.1-preview 1 but should be mostly Ruby 1.8.x compatible.
+Again, vectors are fun.
+
+See LICENSE file for license details.
+
+Olov Lassus <olov.lassus@gmail.com>

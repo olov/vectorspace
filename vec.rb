@@ -1,3 +1,6 @@
+# Copyright (c) 2008 Olov Lassus <olov.lassus@gmail.com>
+# See LICENSE file for license details.
+
 class Vec
   attr_accessor :x, :y, :z
   def initialize(x, y, z)
