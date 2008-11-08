@@ -1,9 +1,10 @@
 class Vec
   attr_accessor :x, :y, :z
   def initialize(x, y, z)
-    @x = x
-    @y = y
-    @z = z
+    @x, @y, @z = x, y, z
+  end
+  def Vec.[](*arr)
+    Vec.new *arr
   end
   def coerce(other)
     [Vec.new(other, other, other), self]
@@ -16,7 +17,7 @@ class Vec
     end
   end
   def to_s
-    sprintf "Vec(%.1f, %.1f, %.1f)", @x, @y, @z
+    sprintf "Vec[%.1f, %.1f, %.1f]", @x, @y, @z
   end
   def length
     Math.sqrt(@x ** 2 + @y ** 2 + @z ** 2)
