@@ -20,24 +20,13 @@ class Vec
   def normalize!
     scale!(1/length)
   end
-
-
   def +(other)
-    if other.instance_of? Fixnum
-      Vec.new @x + other, @y + other, @z + other
-    else
-      Vec.new @x + other.x, @y + other.y, @z + other.z
-    end
+    component_send(:+, other)
+  end
+  def -(other)
+    component_send(:-, other)
   end
   alias component_add +
-
-  def -(other)
-    if other.instance_of? Fixnum
-      Vec.new @x - other, @y - other, @z - other
-    else
-      Vec.new @x - other.x, @y - other.y, @z - other.z
-    end
-  end
   alias component_sub -
 
 protected
@@ -46,5 +35,16 @@ protected
     @y *= l
     @z *= l
     self
+  end
+  def component_send(fn_sym, other)
+    if other.instance_of? Fixnum
+      Vec.new(@x.send(fn_sym, other),
+              @y.send(fn_sym, other),
+              @z.send(fn_sym, other))
+    else
+      Vec.new(@x.send(fn_sym, other.x),
+              @y.send(fn_sym, other.y),
+              @z.send(fn_sym, other.z))
+    end
   end
 end
