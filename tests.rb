@@ -99,4 +99,16 @@ class TestVec < Test::Unit::TestCase
     assert_equal(v1.component_sub(2), Vec.new(2, 4, 6))
 #    assert_equal(2 - v2, Vec.new(1, 0, -1))
   end
+  def test_mul
+    v1 = Vec.new(4, 6, 8)
+    v2 = Vec.new(1, 2, 3)
+    assert_equal(v1.component_mul(v2), Vec.new(4, 12, 24))
+    assert_equal(v1.component_mul(3), Vec.new(12, 18, 24))
+  end
+  def test_div
+    v1 = Vec.new(4, 6, 15)
+    v2 = Vec.new(1, 2, 3)
+    assert_equal(v1.component_div(v2), Vec.new(4, 3, 5))
+    assert_equal(v1.component_div(3), Vec.new(4/3, 2, 5))
+  end
 end

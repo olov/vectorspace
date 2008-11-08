@@ -28,6 +28,12 @@ class Vec
   end
   alias component_add +
   alias component_sub -
+  def component_mul(other)
+    component_send(:*, other)
+  end
+  def component_div(other)
+    component_send(:/, other)
+  end
 
 protected
   def scale!(l)
