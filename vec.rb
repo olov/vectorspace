@@ -21,6 +21,25 @@ class Vec
     scale!(1/length)
   end
 
+
+  def +(other)
+    if other.instance_of? Fixnum
+      Vec.new @x + other, @y + other, @z + other
+    else
+      Vec.new @x + other.x, @y + other.y, @z + other.z
+    end
+  end
+  alias component_add +
+
+  def -(other)
+    if other.instance_of? Fixnum
+      Vec.new @x - other, @y - other, @z - other
+    else
+      Vec.new @x - other.x, @y - other.y, @z - other.z
+    end
+  end
+  alias component_sub -
+
 protected
   def scale!(l)
     @x *= l

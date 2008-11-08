@@ -81,4 +81,22 @@ class TestVec < Test::Unit::TestCase
     assert_equal(v1.length * v2.y, v1.y)
     assert_equal(v1.length * v2.z, v1.z)
   end
+  def test_add
+    v1 = Vec.new(1, 2, 3)
+    v2 = Vec.new(4, 5, 6)
+    assert_equal(v1 + v2, Vec.new(5, 7, 9))
+    assert_equal(v1.component_add(v2), Vec.new(5, 7, 9))
+    assert_equal(v1 + 2, Vec.new(3, 4, 5))
+    assert_equal(v1.component_add(2), Vec.new(3, 4, 5))
+#    assert_equal(2 + v1, Vec.new(3, 4, 5))
+  end
+  def test_sub
+    v1 = Vec.new(4, 6, 8)
+    v2 = Vec.new(1, 2, 3)
+    assert_equal(v1 - v2, Vec.new(3, 4, 5))
+    assert_equal(v1.component_sub(v2), Vec.new(3, 4, 5))
+    assert_equal(v1 - 2, Vec.new(2, 4, 6))
+    assert_equal(v1.component_sub(2), Vec.new(2, 4, 6))
+#    assert_equal(2 - v2, Vec.new(1, 0, -1))
+  end
 end
