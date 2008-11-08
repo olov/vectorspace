@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby1.9
 class Vec
   attr_accessor :x, :y, :z
   def initialize(x, y, z)
