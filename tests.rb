@@ -19,16 +19,16 @@ class TestVec < Test::Unit::TestCase
     assert_nothing_raised { Vec[1, 2.3, 3] }
   end
   def test_bad_new_constructor
-    assert_raise (ArgumentError) { Vec.new }
-    assert_raise (ArgumentError) { Vec.new(1) }
-    assert_raise (ArgumentError) { Vec.new(1, 2) }
-    assert_raise (ArgumentError) { Vec.new(1, 2, 3, 4) }
+    assert_raise(ArgumentError) { Vec.new }
+    assert_raise(ArgumentError) { Vec.new(1) }
+    assert_raise(ArgumentError) { Vec.new(1, 2) }
+    assert_raise(ArgumentError) { Vec.new(1, 2, 3, 4) }
   end
   def test_bad_new_array
-    assert_raise (ArgumentError) { Vec[] }
-    assert_raise (ArgumentError) { Vec[1] }
-    assert_raise (ArgumentError) { Vec[1, 2] }
-    assert_raise (ArgumentError) { Vec[1, 2, 3, 4] }
+    assert_raise(ArgumentError) { Vec[] }
+    assert_raise(ArgumentError) { Vec[1] }
+    assert_raise(ArgumentError) { Vec[1, 2] }
+    assert_raise(ArgumentError) { Vec[1, 2, 3, 4] }
   end
   def test_new_array_equals_constructor
     assert_equal(Vec.new(1, 2, 3), Vec[1, 2, 3])
@@ -133,7 +133,7 @@ class TestVec < Test::Unit::TestCase
     v1 = Vec[3, 0, 0]
     v2 = Vec[1, 1, 0]
     angle = Math.acos((v1 ** v2) / (v1.length * v2.length))
-    assert_in_delta((Math::PI/4), angle, 0.01)
+    assert_in_delta(Math::PI/4, angle, 2 ** -20)
     assert_equal(v1 ** v2, v1.dot(v2))
   end
   def test_cross_is_perpendicular

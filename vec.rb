@@ -7,7 +7,7 @@ class Vec
     @x, @y, @z = x, y, z
   end
   def Vec.[](*arr)
-    Vec.new *arr
+    Vec.new(*arr)
   end
   def coerce(other)
     [Vec.new(other, other, other), self]
