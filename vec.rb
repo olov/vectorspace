@@ -5,8 +5,15 @@ class Vec
     @y = y
     @z = z
   end
+  def coerce(other)
+    [Vec.new(other, other, other), self]
+  end
   def ==(other)
-    @x == other.x and @y == other.y and @z == other.z
+    if other.instance_of? Vec
+      @x == other.x and @y == other.y and @z == other.z
+    else
+      false
+    end
   end
   def to_s
     sprintf "Vec(%.1f, %.1f, %.1f)", @x, @y, @z
@@ -26,24 +33,26 @@ class Vec
   def -(other)
     component_send(:-, other)
   end
-  alias component_add +
-  alias component_sub -
-  def component_mul(other)
+  def *(other)
     component_send(:*, other)
   end
-  def component_div(other)
+  def /(other)
     component_send(:/, other)
   end
-  def *(other)
+  alias add +
+  alias sub -
+  alias mul *
+  alias div /
+  def **(other)
     @x * other.x + @y * other.y + @z * other.z
   end
-  alias dot *
-  def **(other)
+  alias dot **
+  def %(other)
     Vec.new(@y * other.z - @z * other.y,
             @z * other.x - @x * other.z,
             @x * other.y - @y * other.x)
   end
-  alias cross **
+  alias cross %
 
 protected
   def scale!(l)
@@ -53,14 +62,14 @@ protected
     self
   end
   def component_send(fn_sym, other)
-    if other.instance_of? Fixnum
-      Vec.new(@x.send(fn_sym, other),
-              @y.send(fn_sym, other),
-              @z.send(fn_sym, other))
-    else
+    if other.instance_of? Vec
       Vec.new(@x.send(fn_sym, other.x),
               @y.send(fn_sym, other.y),
               @z.send(fn_sym, other.z))
+    else
+      Vec.new(@x.send(fn_sym, other),
+              @y.send(fn_sym, other),
+              @z.send(fn_sym, other))
     end
   end
 end

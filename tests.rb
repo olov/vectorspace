@@ -85,45 +85,54 @@ class TestVec < Test::Unit::TestCase
     v1 = Vec.new(1, 2, 3)
     v2 = Vec.new(4, 5, 6)
     assert_equal(v1 + v2, Vec.new(5, 7, 9))
-    assert_equal(v1.component_add(v2), Vec.new(5, 7, 9))
+    assert_equal(v1 + v2, v1.add(v2))
     assert_equal(v1 + 2, Vec.new(3, 4, 5))
-    assert_equal(v1.component_add(2), Vec.new(3, 4, 5))
-#    assert_equal(2 + v1, Vec.new(3, 4, 5))
+    assert_equal(v1 + 2, v1.add(2))
   end
   def test_sub
     v1 = Vec.new(4, 6, 8)
     v2 = Vec.new(1, 2, 3)
     assert_equal(v1 - v2, Vec.new(3, 4, 5))
-    assert_equal(v1.component_sub(v2), Vec.new(3, 4, 5))
+    assert_equal(v1 - v2, v1.sub(v2))
     assert_equal(v1 - 2, Vec.new(2, 4, 6))
-    assert_equal(v1.component_sub(2), Vec.new(2, 4, 6))
-#    assert_equal(2 - v2, Vec.new(1, 0, -1))
+    assert_equal(v1 - 2, v1.sub(2))
   end
   def test_mul
     v1 = Vec.new(4, 6, 8)
     v2 = Vec.new(1, 2, 3)
-    assert_equal(v1.component_mul(v2), Vec.new(4, 12, 24))
-    assert_equal(v1.component_mul(3), Vec.new(12, 18, 24))
+    assert_equal(v1 * v2, Vec.new(4, 12, 24))
+    assert_equal(v1 * v2, v1.mul(v2))
+    assert_equal(v1 * 3, Vec.new(12, 18, 24))
+    assert_equal(v1 * 3, v1.mul(3))
   end
   def test_div
     v1 = Vec.new(4, 6, 15)
     v2 = Vec.new(1, 2, 3)
-    assert_equal(v1.component_div(v2), Vec.new(4, 3, 5))
-    assert_equal(v1.component_div(3), Vec.new(4/3, 2, 5))
+    assert_equal(v1 / v2, Vec.new(4, 3, 5))
+    assert_equal(v1 / v2, v1.div(v2))
+    assert_equal(v1 / 3.0, Vec.new(4/3.0, 2, 5))
+    assert_equal(v1 / 3, v1.div(3))
   end
   def test_dot_angle
     v1 = Vec.new(3, 0, 0)
     v2 = Vec.new(1, 1, 0)
-    angle = Math.acos((v1 * v2) / (v1.length * v2.length))
+    angle = Math.acos((v1 ** v2) / (v1.length * v2.length))
     assert_equal((Math::PI/4).round(4), angle.round(4))
-    assert_equal(v1 * v2, v1.dot(v2))
+    assert_equal(v1 ** v2, v1.dot(v2))
   end
   def test_cross_is_perpendicular
     v1 = Vec.new(1, 1, -1)
     v2 = Vec.new(-1, 1, 1)
-    v3 = v1 ** v2
-    assert_equal(0, v1 * v3)
-    assert_equal(0, v2 * v3)
-    assert_equal(v1 ** v2, v1.cross(v2))
+    v3 = v1 % v2
+    assert_equal(0, v1 ** v3)
+    assert_equal(0, v2 ** v3)
+    assert_equal(v1 % v2, v1.cross(v2))
+  end
+  def test_coerce
+    v1 = Vec.new(-1, 1, 3)
+    assert_equal(Vec.new(1, 3, 5), 2 + v1)
+    assert_equal(Vec.new(3, 1, -1), 2 - v1)
+    assert_equal(Vec.new(-2, 2, 2.0/3), 2.0 / v1)
+    assert_equal(Vec.new(-2, 2, 6), 2 * v1)
   end
 end
