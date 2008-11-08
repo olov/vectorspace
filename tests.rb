@@ -46,4 +46,39 @@ class TestVec < Test::Unit::TestCase
     assert_equal(v.y, 3.0)
     assert_equal(v.z, 4.3)
   end
+  def test_get_length
+    assert_equal(1, Vec.new(1, 0, 0).length)
+    assert_equal(2, Vec.new(0, 2, 0).length)
+    assert_equal(3, Vec.new(0, 0, 3).length)
+    assert_equal(Math.sqrt(1**2 + 2**2 + 3**2), Vec.new(1, 2, 3).length)
+  end
+  def test_set_length
+    v1 = Vec.new(1, 2, 3)
+    v2 = Vec.new(1, 2, 3)
+    v2.length = 2
+    assert_equal(v2.length, 2)
+    assert_equal(v2.x / v1.x, v2.length / v1.length)
+    assert_equal(v2.y / v1.y, v2.length / v1.length)
+    assert_equal(v2.z / v1.z, v2.length / v1.length)
+  end
+  def test_scale_up
+    v1 = Vec.new(1, 2, 3)
+    v2 = Vec.new(2, 4, 6)
+    v1.length *= 2
+    assert_equal(v1, v2)
+  end
+  def test_scale_down
+    v1 = Vec.new(1, 2, 3)
+    v2 = Vec.new(2, 4, 6)
+    v2.length /= 2
+    assert_equal(v1, v2)
+  end
+  def test_normalize
+    v1 = Vec.new(1, 2, 3)
+    v2 = Vec.new(1, 2, 3).normalize!
+    assert_equal(v2.length, 1)
+    assert_equal(v1.length * v2.x, v1.x)
+    assert_equal(v1.length * v2.y, v1.y)
+    assert_equal(v1.length * v2.z, v1.z)
+  end
 end
