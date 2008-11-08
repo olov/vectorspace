@@ -34,6 +34,16 @@ class Vec
   def component_div(other)
     component_send(:/, other)
   end
+  def *(other)
+    @x * other.x + @y * other.y + @z * other.z
+  end
+  alias dot *
+  def **(other)
+    Vec.new(@y * other.z - @z * other.y,
+            @z * other.x - @x * other.z,
+            @x * other.y - @y * other.x)
+  end
+  alias cross **
 
 protected
   def scale!(l)

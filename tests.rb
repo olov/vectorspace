@@ -111,4 +111,19 @@ class TestVec < Test::Unit::TestCase
     assert_equal(v1.component_div(v2), Vec.new(4, 3, 5))
     assert_equal(v1.component_div(3), Vec.new(4/3, 2, 5))
   end
+  def test_dot_angle
+    v1 = Vec.new(3, 0, 0)
+    v2 = Vec.new(1, 1, 0)
+    angle = Math.acos((v1 * v2) / (v1.length * v2.length))
+    assert_equal((Math::PI/4).round(4), angle.round(4))
+    assert_equal(v1 * v2, v1.dot(v2))
+  end
+  def test_cross_is_perpendicular
+    v1 = Vec.new(1, 1, -1)
+    v2 = Vec.new(-1, 1, 1)
+    v3 = v1 ** v2
+    assert_equal(0, v1 * v3)
+    assert_equal(0, v2 * v3)
+    assert_equal(v1 ** v2, v1.cross(v2))
+  end
 end
